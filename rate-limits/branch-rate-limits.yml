@@ -1,0 +1,18 @@
+name: Branch Insurance API Rate Limits
+description: Branch Insurance does not publicly document specific rate limits for the Quote to Bind GraphQL API. Rate limit policies are managed through the Tyk API Gateway and are set on a per-partner basis. Partners should contact api@ourbranch.com for specific rate limit information applicable to their integration.
+url: https://docs.v2.api.ourbranch.com/
+contact: api@ourbranch.com
+rateLimits:
+  - name: Quote to Bind GraphQL API
+    description: Rate limits are not publicly disclosed. Enforced via Tyk API Gateway at the partner level.
+    documented: false
+    notes: Branch uses Tyk API Management with six edge gateways and three control planes. Rate limiting and throttling are applied per partner configuration. Contact api@ourbranch.com for rate limit details specific to your partner account.
+timeouts:
+  description: The API documentation includes a dedicated Timeouts page, indicating timeout handling is a documented concern.
+  url: https://docs.v2.api.ourbranch.com/timeouts/
+  notes: Specific timeout values are documented within the API docs. Policy document and offer PDF links have a 15-minute validity window after retrieval.
+infrastructure:
+  gateway: Tyk API Gateway
+  environments: 3 (production, staging, development)
+  controlPlanes: 3
+  edgeGateways: 6

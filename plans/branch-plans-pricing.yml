@@ -1,0 +1,32 @@
+name: Branch Insurance API Plans & Pricing
+description: Branch Insurance API access is partner-based and requires direct engagement with the Branch team. There are no publicly listed self-serve pricing tiers. Partners integrate the Quote to Bind GraphQL API to embed home and auto insurance quoting and binding into their own workflows.
+url: https://docs.v2.api.ourbranch.com/
+contact: api@ourbranch.com
+plans:
+  - name: Partner API Access
+    description: Access to the Branch Quote to Bind GraphQL API for embedding home and auto insurance quoting, binding, and policy management into partner platforms. Partner onboarding is managed directly by Branch.
+    type: Partner
+    access: By invitation / direct contact with api@ourbranch.com
+    features:
+      - requestQuoteV2 - initial quote generation
+      - recalculateQuoteV2 - modify existing offers
+      - addCar / addDriver - enhance quotes with additional coverage
+      - requestBind - complete purchase / bind policy
+      - getOffer - retrieve offer details
+      - getBoundPoliciesByOfferId - access post-bind policy information
+      - getPolicyDocuments - retrieve policy document links
+      - getOfferPDF - download offer PDFs
+      - Webhook notifications for policy bind and document signing events
+      - CSV reporting
+      - GraphQL Playground for interactive testing
+    environments:
+      production: https://ourbranch.com/
+      staging: https://staging.v2.api.ourbranch.com/
+      dev: https://musa.ourbranch.dev/
+    authentication:
+      - type: API Key
+        header: Authorization
+      - type: Affinity Code Header
+        header: x-affinity-code
+        notes: Required only for partners managing multiple affinity codes
+    notes: Some API calls provide enhanced data not available to all partners. Enhanced data access must be arranged through api@ourbranch.com. There is no public self-service sign-up; Branch currently works with approximately 20 partner integrations.

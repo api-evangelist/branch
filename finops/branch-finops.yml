@@ -1,0 +1,34 @@
+name: Branch Insurance API FinOps
+description: Branch Insurance API access is partner-based with no public pricing or self-serve cost model. The API enables partners to embed home and auto insurance quoting and binding into their own platforms. Revenue is generated through insurance premium sharing and partner arrangements, not API subscription fees.
+url: https://www.ourbranch.com/
+contact: api@ourbranch.com
+costModel:
+  type: Partner Revenue Share
+  description: Branch Insurance operates a B2B2C model where partners integrate the Quote to Bind API and earn through insurance policy sales. There are no published API subscription fees, per-call charges, or usage-based pricing tiers. All commercial arrangements are negotiated directly with Branch.
+  selfServe: false
+  publicPricing: false
+considerations:
+  - API access requires direct partnership agreement with Branch Insurance
+  - No metered billing or public rate cards available
+  - Commercial terms are set on a per-partner basis
+  - Enhanced data access (additional API fields) requires separate authorization from Branch
+  - Partners embed Branch insurance products and earn based on policy sales, not API call volume
+  - Approximately 20 partner integrations active as of 2024
+  - Branch raised $50M to expand API-first insurance distribution model
+budgetingGuidance:
+  description: Since there is no public per-call or subscription pricing, API integration cost for partners consists primarily of engineering effort for integration. Ongoing operational costs depend on commercial terms agreed with Branch.
+  engineeringCost: Integration effort varies by complexity; hybrid handoff to Branch's site is supported to reduce integration scope
+  revenueModel: Insurance premium commissions or referral fees per policy sold via partner integration
+fundingContext:
+  totalRaised: "$50M+"
+  investors:
+    - Greycroft
+    - Hudson Structured Capital Management
+    - SCOR
+    - SignalFire
+    - American Family Ventures
+    - Rock Holdings
+    - Rise of the Rest
+    - Elefound
+    - Foundation Capital
+    - Acrew Capital
