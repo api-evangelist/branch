@@ -1,0 +1,63 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebAPI",
+  "@id": "https://docs.v2.api.ourbranch.com/",
+  "name": "Branch Quote to Bind API",
+  "description": "A GraphQL API that enables partner platforms to embed Branch home and auto insurance quoting, binding, and policy management into their own workflows. The API covers the full insurance lifecycle from initial quote generation through policy purchase and document retrieval.",
+  "url": "https://docs.v2.api.ourbranch.com/",
+  "documentation": "https://docs.v2.api.ourbranch.com/",
+  "version": "v2",
+  "provider": {
+    "@type": "Organization",
+    "name": "Branch Insurance",
+    "url": "https://www.ourbranch.com/",
+    "email": "api@ourbranch.com"
+  },
+  "availableChannel": [
+    {
+      "@type": "ServiceChannel",
+      "name": "Staging GraphQL Endpoint",
+      "serviceUrl": "https://staging.v2.api.ourbranch.com",
+      "description": "Staging environment for testing the Branch Quote to Bind API"
+    },
+    {
+      "@type": "ServiceChannel",
+      "name": "GraphQL Schema Reference",
+      "serviceUrl": "https://studio.apollographql.com/public/Branch-Quote-to-Bind-Staging/schema/reference?variant=current",
+      "description": "Apollo GraphOS Studio schema reference for the Branch Quote to Bind API"
+    },
+    {
+      "@type": "ServiceChannel",
+      "name": "GraphQL Playground",
+      "serviceUrl": "https://studio.apollographql.com/public/Branch-Quote-to-Bind-Staging/explorer?variant=current",
+      "description": "Interactive GraphQL explorer for the Branch Quote to Bind API"
+    }
+  ],
+  "serviceType": "GraphQL API",
+  "category": [
+    "Insurance",
+    "InsurTech",
+    "Home Insurance",
+    "Auto Insurance",
+    "Renters Insurance",
+    "Umbrella Insurance",
+    "Quote to Bind"
+  ],
+  "featureList": [
+    "requestQuoteV2 - Initial quote generation for home and auto insurance",
+    "recalculateQuoteV2 - Modify existing quotes with updated information",
+    "addCar - Add a vehicle to an existing insurance quote",
+    "addDriver - Add a driver to an existing insurance quote",
+    "requestBind - Complete the insurance purchase and bind the policy",
+    "getOffer - Retrieve a previously created insurance offer by ID",
+    "getBoundPoliciesByOfferId - Retrieve bound policy details after purchase",
+    "getPolicyDocuments - Access policy documents (URLs valid for 15 minutes)",
+    "getOfferPDF - Generate downloadable offer PDFs (expires in 15 minutes)"
+  ],
+  "termsOfService": "https://www.ourbranch.com/",
+  "isPartOf": {
+    "@type": "Organization",
+    "name": "Branch Insurance",
+    "url": "https://www.ourbranch.com/"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.ourbranch.com/",
+  "name": "Branch Insurance",
+  "description": "Branch is a home and auto insurance platform that offers bundled policy quoting, binding, payment processing, and policy management through a GraphQL API. Partners can embed Branch's insurance products directly into their own workflows using the Quote to Bind API, enabling customers to get quotes and purchase home, auto, renters, and umbrella insurance in seconds.",
+  "url": "https://www.ourbranch.com/",
+  "logo": "https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg",
+  "sameAs": [
+    "https://www.linkedin.com/company/branch-insurance",
+    "https://twitter.com/branchinsurance"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "api@ourbranch.com",
+    "contactType": "API Support"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Branch Insurance Products",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Home Insurance",
+        "description": "Homeowners insurance coverage available through the Branch Quote to Bind API"
+      },
+      {
+        "@type": "Offer",
+        "name": "Auto Insurance",
+        "description": "Auto insurance coverage available through the Branch Quote to Bind API"
+      },
+      {
+        "@type": "Offer",
+        "name": "Renters Insurance",
+        "description": "Renters insurance coverage available through the Branch Quote to Bind API"
+      },
+      {
+        "@type": "Offer",
+        "name": "Umbrella Insurance",
+        "description": "Umbrella insurance coverage available through the Branch Quote to Bind API"
+      }
+    ]
+  },
+  "subjectOf": {
+    "@type": "WebAPI",
+    "@id": "https://docs.v2.api.ourbranch.com/",
+    "name": "Branch Quote to Bind API",
+    "description": "A GraphQL API that enables partner platforms to embed Branch home and auto insurance quoting, binding, and policy management into their own workflows. The API covers the full insurance lifecycle from initial quote generation through policy purchase and document retrieval.",
+    "documentation": "https://docs.v2.api.ourbranch.com/",
+    "termsOfService": "https://www.ourbranch.com/",
+    "provider": {
+      "@type": "Organization",
+      "name": "Branch Insurance",
+      "url": "https://www.ourbranch.com/"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://staging.v2.api.ourbranch.com",
+      "name": "GraphQL Endpoint"
+    }
+  }
+}
