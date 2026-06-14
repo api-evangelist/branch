@@ -1,0 +1,1085 @@
+# Branch Insurance - Conceptual GraphQL Schema
+# Derived from the Branch Quote to Bind API domain model
+# https://docs.v2.api.ourbranch.com/
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar Date
+scalar DateTime
+scalar Decimal
+scalar JSON
+scalar Upload
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum PolicyStatus {
+  PENDING
+  ACTIVE
+  CANCELLED
+  EXPIRED
+  NON_RENEWED
+  RESCINDED
+}
+
+enum QuoteStatus {
+  DRAFT
+  RATED
+  OFFERED
+  BOUND
+  EXPIRED
+  DECLINED
+  REFERRED
+}
+
+enum ProductLine {
+  HOME
+  AUTO
+  RENTERS
+  UMBRELLA
+  BUNDLE
+}
+
+enum CoverageType {
+  # Homeowners
+  DWELLING
+  OTHER_STRUCTURES
+  PERSONAL_PROPERTY
+  LOSS_OF_USE
+  PERSONAL_LIABILITY
+  MEDICAL_PAYMENTS
+  WATER_BACKUP
+  EQUIPMENT_BREAKDOWN
+  IDENTITY_FRAUD
+  # Auto
+  BODILY_INJURY_LIABILITY
+  PROPERTY_DAMAGE_LIABILITY
+  UNINSURED_MOTORIST_BODILY_INJURY
+  UNINSURED_MOTORIST_PROPERTY_DAMAGE
+  UNDERINSURED_MOTORIST
+  COMPREHENSIVE
+  COLLISION
+  MEDICAL_PAYMENTS_AUTO
+  PERSONAL_INJURY_PROTECTION
+  ROADSIDE_ASSISTANCE
+  RENTAL_REIMBURSEMENT
+  GAP_COVERAGE
+  # Renters
+  RENTERS_PERSONAL_PROPERTY
+  RENTERS_LOSS_OF_USE
+  RENTERS_LIABILITY
+  RENTERS_MEDICAL_PAYMENTS
+  # Umbrella
+  EXCESS_LIABILITY
+  UMBRELLA_PERSONAL_LIABILITY
+}
+
+enum ConstructionType {
+  FRAME
+  MASONRY
+  MASONRY_VENEER
+  SUPERIOR
+  MANUFACTURED
+  MODULAR
+}
+
+enum RoofMaterial {
+  ASPHALT_SHINGLE
+  METAL
+  TILE
+  SLATE
+  WOOD_SHAKE
+  FLAT
+  OTHER
+}
+
+enum ResidenceType {
+  SINGLE_FAMILY
+  CONDO
+  TOWNHOUSE
+  DUPLEX
+  MOBILE_HOME
+  RENTAL
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  ACH_BANK_TRANSFER
+  ESCROW
+  CHECK
+}
+
+enum PaymentFrequency {
+  MONTHLY
+  SEMI_ANNUAL
+  ANNUAL
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSED
+  FAILED
+  REFUNDED
+  VOIDED
+}
+
+enum DocumentType {
+  DECLARATIONS_PAGE
+  CERTIFICATE_OF_INSURANCE
+  POLICY_DOCUMENT
+  ID_CARD
+  CANCELLATION_NOTICE
+  RENEWAL_NOTICE
+  ENDORSEMENT_DOCUMENT
+  BINDER
+  INVOICE
+}
+
+enum MaritalStatus {
+  SINGLE
+  MARRIED
+  DIVORCED
+  WIDOWED
+  DOMESTIC_PARTNER
+}
+
+enum OwnershipStatus {
+  OWNER
+  RENTER
+  OTHER
+}
+
+enum LicenseStatus {
+  VALID
+  SUSPENDED
+  REVOKED
+  EXPIRED
+  NONE
+}
+
+enum ViolationType {
+  SPEEDING
+  AT_FAULT_ACCIDENT
+  NOT_AT_FAULT_ACCIDENT
+  DUI_DWI
+  RECKLESS_DRIVING
+  DISTRACTED_DRIVING
+  FAILURE_TO_STOP
+  OTHER_MOVING_VIOLATION
+  NON_MOVING_VIOLATION
+}
+
+enum ClaimType {
+  WIND
+  HAIL
+  FIRE
+  WATER
+  THEFT
+  LIABILITY
+  FLOOD
+  EARTHQUAKE
+  VANDALISM
+  COLLISION_CLAIM
+  COMPREHENSIVE_CLAIM
+  OTHER
+}
+
+enum EndorsementStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  APPLIED
+}
+
+enum CancellationReason {
+  NON_PAYMENT
+  INSURED_REQUEST
+  UNDERWRITING
+  FRAUD
+  NON_RENEWAL
+}
+
+enum CreditTier {
+  PREFERRED_PLUS
+  PREFERRED
+  STANDARD
+  SUBSTANDARD
+  DECLINED
+}
+
+enum FloodZone {
+  A
+  AE
+  AH
+  AO
+  AR
+  A99
+  B
+  C
+  D
+  V
+  VE
+  X
+  UNKNOWN
+}
+
+enum PartnerStatus {
+  ACTIVE
+  SUSPENDED
+  PENDING_APPROVAL
+}
+
+# ---------------------------------------------------------------------------
+# Core Address Type
+# ---------------------------------------------------------------------------
+
+type Address {
+  line1: String!
+  line2: String
+  city: String!
+  state: String!
+  zip: String!
+  county: String
+  country: String!
+  latitude: Decimal
+  longitude: Decimal
+  standardized: Boolean
+}
+
+input AddressInput {
+  line1: String!
+  line2: String
+  city: String!
+  state: String!
+  zip: String!
+  county: String
+  country: String
+}
+
+# ---------------------------------------------------------------------------
+# Partner
+# ---------------------------------------------------------------------------
+
+type Partner {
+  id: ID!
+  name: String!
+  slug: String!
+  status: PartnerStatus!
+  contactEmail: String
+  contactPhone: String
+  webhookUrl: String
+  allowedStates: [String!]!
+  allowedProducts: [ProductLine!]!
+  apiKeyPrefix: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  quotes(filter: QuoteFilter, limit: Int, offset: Int): QuoteConnection!
+  policies(filter: PolicyFilter, limit: Int, offset: Int): PolicyConnection!
+}
+
+# ---------------------------------------------------------------------------
+# Applicant
+# ---------------------------------------------------------------------------
+
+type Applicant {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  dateOfBirth: Date!
+  maritalStatus: MaritalStatus
+  ownershipStatus: OwnershipStatus
+  mailingAddress: Address
+  creditTier: CreditTier
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  quotes: [Quote!]!
+  policies: [Policy!]!
+}
+
+input ApplicantInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  dateOfBirth: Date!
+  maritalStatus: MaritalStatus
+  ownershipStatus: OwnershipStatus
+  mailingAddress: AddressInput
+}
+
+# ---------------------------------------------------------------------------
+# Property
+# ---------------------------------------------------------------------------
+
+type Property {
+  id: ID!
+  address: Address!
+  residenceType: ResidenceType!
+  yearBuilt: Int
+  squareFootage: Int
+  stories: Int
+  constructionType: ConstructionType
+  roofAge: Int
+  roofMaterial: RoofMaterial
+  hasPool: Boolean
+  hasTrampoline: Boolean
+  hasDogOnPremises: Boolean
+  distanceToCoast: Decimal
+  distanceToFireStation: Decimal
+  floodZone: FloodZone
+  protectionClass: Int
+  purchasePrice: Decimal
+  purchaseDate: Date
+}
+
+input PropertyInput {
+  address: AddressInput!
+  residenceType: ResidenceType!
+  yearBuilt: Int
+  squareFootage: Int
+  stories: Int
+  constructionType: ConstructionType
+  roofAge: Int
+  roofMaterial: RoofMaterial
+  hasPool: Boolean
+  hasTrampoline: Boolean
+  hasDogOnPremises: Boolean
+  purchasePrice: Decimal
+  purchaseDate: Date
+}
+
+# ---------------------------------------------------------------------------
+# Vehicle
+# ---------------------------------------------------------------------------
+
+type Vehicle {
+  id: ID!
+  year: Int!
+  make: String!
+  model: String!
+  trim: String
+  vin: String
+  annualMileage: Int
+  garagingAddress: Address
+  primaryUse: String
+  ownershipType: String
+  hasAntiTheft: Boolean
+  hasAntiLock: Boolean
+  hasAirbags: Boolean
+  currentValue: Decimal
+}
+
+input VehicleInput {
+  year: Int!
+  make: String!
+  model: String!
+  trim: String
+  vin: String
+  annualMileage: Int
+  garagingAddress: AddressInput
+  primaryUse: String
+  ownershipType: String
+  hasAntiTheft: Boolean
+  hasAntiLock: Boolean
+  hasAirbags: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Driver
+# ---------------------------------------------------------------------------
+
+type Driver {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  dateOfBirth: Date!
+  licenseState: String
+  licenseStatus: LicenseStatus
+  yearsLicensed: Int
+  violations: [Violation!]!
+  isApplicant: Boolean!
+}
+
+input DriverInput {
+  firstName: String!
+  lastName: String!
+  dateOfBirth: Date!
+  licenseState: String
+  licenseStatus: LicenseStatus
+  yearsLicensed: Int
+  violations: [ViolationInput!]
+  isApplicant: Boolean
+}
+
+type Violation {
+  type: ViolationType!
+  date: Date!
+  description: String
+}
+
+input ViolationInput {
+  type: ViolationType!
+  date: Date!
+  description: String
+}
+
+# ---------------------------------------------------------------------------
+# Loss History / Claims
+# ---------------------------------------------------------------------------
+
+type LossHistory {
+  id: ID!
+  claimType: ClaimType!
+  claimDate: Date!
+  claimAmount: Decimal
+  description: String
+  atFault: Boolean
+  policyNumber: String
+  priorCarrier: String
+}
+
+input LossHistoryInput {
+  claimType: ClaimType!
+  claimDate: Date!
+  claimAmount: Decimal
+  description: String
+  atFault: Boolean
+  policyNumber: String
+  priorCarrier: String
+}
+
+# ---------------------------------------------------------------------------
+# Coverage
+# ---------------------------------------------------------------------------
+
+type Coverage {
+  type: CoverageType!
+  limit: Decimal
+  deductible: Decimal
+  premium: Decimal
+  isIncluded: Boolean!
+  isOptional: Boolean!
+  description: String
+}
+
+input CoverageInput {
+  type: CoverageType!
+  limit: Decimal
+  deductible: Decimal
+  include: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Premium
+# ---------------------------------------------------------------------------
+
+type Premium {
+  annualAmount: Decimal!
+  monthlyAmount: Decimal!
+  semiAnnualAmount: Decimal!
+  basePremium: Decimal!
+  fees: Decimal!
+  taxes: Decimal!
+  discounts: [Discount!]!
+  surcharges: [Surcharge!]!
+  currency: String!
+}
+
+type Discount {
+  name: String!
+  amount: Decimal!
+  percentage: Decimal
+  description: String
+}
+
+type Surcharge {
+  name: String!
+  amount: Decimal!
+  percentage: Decimal
+  description: String
+}
+
+# ---------------------------------------------------------------------------
+# Quote Types
+# ---------------------------------------------------------------------------
+
+interface Quote {
+  id: ID!
+  status: QuoteStatus!
+  productLine: ProductLine!
+  applicant: Applicant!
+  partner: Partner
+  premium: Premium!
+  coverages: [Coverage!]!
+  effectiveDate: Date!
+  expirationDate: Date!
+  declineReasons: [String!]
+  referralReasons: [String!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type HomeQuote implements Quote {
+  id: ID!
+  status: QuoteStatus!
+  productLine: ProductLine!
+  applicant: Applicant!
+  partner: Partner
+  premium: Premium!
+  coverages: [Coverage!]!
+  effectiveDate: Date!
+  expirationDate: Date!
+  declineReasons: [String!]
+  referralReasons: [String!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  property: Property!
+  lossHistory: [LossHistory!]!
+  dwellingValue: Decimal
+  replacementCost: Boolean
+}
+
+type AutoQuote implements Quote {
+  id: ID!
+  status: QuoteStatus!
+  productLine: ProductLine!
+  applicant: Applicant!
+  partner: Partner
+  premium: Premium!
+  coverages: [Coverage!]!
+  effectiveDate: Date!
+  expirationDate: Date!
+  declineReasons: [String!]
+  referralReasons: [String!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  vehicles: [Vehicle!]!
+  drivers: [Driver!]!
+  lossHistory: [LossHistory!]!
+}
+
+type RentersQuote implements Quote {
+  id: ID!
+  status: QuoteStatus!
+  productLine: ProductLine!
+  applicant: Applicant!
+  partner: Partner
+  premium: Premium!
+  coverages: [Coverage!]!
+  effectiveDate: Date!
+  expirationDate: Date!
+  declineReasons: [String!]
+  referralReasons: [String!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  property: Property!
+  monthlyRent: Decimal
+}
+
+type UmbrellaQuote implements Quote {
+  id: ID!
+  status: QuoteStatus!
+  productLine: ProductLine!
+  applicant: Applicant!
+  partner: Partner
+  premium: Premium!
+  coverages: [Coverage!]!
+  effectiveDate: Date!
+  expirationDate: Date!
+  declineReasons: [String!]
+  referralReasons: [String!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  umbrellaLimit: Decimal!
+  underlyingPolicies: [String!]!
+}
+
+type BundleQuote {
+  id: ID!
+  status: QuoteStatus!
+  applicant: Applicant!
+  partner: Partner
+  homeQuote: HomeQuote
+  autoQuote: AutoQuote
+  rentersQuote: RentersQuote
+  totalPremium: Premium!
+  bundleDiscount: Decimal
+  effectiveDate: Date!
+  expirationDate: Date!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Quote Inputs
+# ---------------------------------------------------------------------------
+
+input HomeQuoteRequest {
+  applicant: ApplicantInput!
+  property: PropertyInput!
+  lossHistory: [LossHistoryInput!]
+  coverages: [CoverageInput!]
+  effectiveDate: Date!
+  partnerId: ID
+}
+
+input AutoQuoteRequest {
+  applicant: ApplicantInput!
+  vehicles: [VehicleInput!]!
+  drivers: [DriverInput!]!
+  lossHistory: [LossHistoryInput!]
+  coverages: [CoverageInput!]
+  effectiveDate: Date!
+  partnerId: ID
+}
+
+input RentersQuoteRequest {
+  applicant: ApplicantInput!
+  property: PropertyInput!
+  monthlyRent: Decimal
+  coverages: [CoverageInput!]
+  effectiveDate: Date!
+  partnerId: ID
+}
+
+input UmbrellaQuoteRequest {
+  applicant: ApplicantInput!
+  umbrellaLimit: Decimal!
+  underlyingPolicies: [String!]!
+  effectiveDate: Date!
+  partnerId: ID
+}
+
+input BundleQuoteRequest {
+  home: HomeQuoteRequest
+  auto: AutoQuoteRequest
+  renters: RentersQuoteRequest
+  effectiveDate: Date!
+  partnerId: ID
+}
+
+input QuoteUpdateInput {
+  coverages: [CoverageInput!]
+  effectiveDate: Date
+  property: PropertyInput
+  vehicles: [VehicleInput!]
+  drivers: [DriverInput!]
+}
+
+input QuoteFilter {
+  status: QuoteStatus
+  productLine: ProductLine
+  applicantEmail: String
+  partnerId: ID
+  createdAfter: DateTime
+  createdBefore: DateTime
+  state: String
+}
+
+# ---------------------------------------------------------------------------
+# Policy Types
+# ---------------------------------------------------------------------------
+
+interface Policy {
+  id: ID!
+  policyNumber: String!
+  status: PolicyStatus!
+  productLine: ProductLine!
+  applicant: Applicant!
+  partner: Partner
+  premium: Premium!
+  coverages: [Coverage!]!
+  effectiveDate: Date!
+  expirationDate: Date!
+  payments: [Payment!]!
+  documents: [Document!]!
+  endorsements: [Endorsement!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type HomePolicy implements Policy {
+  id: ID!
+  policyNumber: String!
+  status: PolicyStatus!
+  productLine: ProductLine!
+  applicant: Applicant!
+  partner: Partner
+  premium: Premium!
+  coverages: [Coverage!]!
+  effectiveDate: Date!
+  expirationDate: Date!
+  payments: [Payment!]!
+  documents: [Document!]!
+  endorsements: [Endorsement!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  property: Property!
+  lender: Lender
+  mortgageeClause: String
+}
+
+type AutoPolicy implements Policy {
+  id: ID!
+  policyNumber: String!
+  status: PolicyStatus!
+  productLine: ProductLine!
+  applicant: Applicant!
+  partner: Partner
+  premium: Premium!
+  coverages: [Coverage!]!
+  effectiveDate: Date!
+  expirationDate: Date!
+  payments: [Payment!]!
+  documents: [Document!]!
+  endorsements: [Endorsement!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  vehicles: [Vehicle!]!
+  drivers: [Driver!]!
+}
+
+type RentersPolicy implements Policy {
+  id: ID!
+  policyNumber: String!
+  status: PolicyStatus!
+  productLine: ProductLine!
+  applicant: Applicant!
+  partner: Partner
+  premium: Premium!
+  coverages: [Coverage!]!
+  effectiveDate: Date!
+  expirationDate: Date!
+  payments: [Payment!]!
+  documents: [Document!]!
+  endorsements: [Endorsement!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  property: Property!
+}
+
+type UmbrellaPolicy implements Policy {
+  id: ID!
+  policyNumber: String!
+  status: PolicyStatus!
+  productLine: ProductLine!
+  applicant: Applicant!
+  partner: Partner
+  premium: Premium!
+  coverages: [Coverage!]!
+  effectiveDate: Date!
+  expirationDate: Date!
+  payments: [Payment!]!
+  documents: [Document!]!
+  endorsements: [Endorsement!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  umbrellaLimit: Decimal!
+}
+
+input PolicyFilter {
+  status: PolicyStatus
+  productLine: ProductLine
+  applicantEmail: String
+  partnerId: ID
+  policyNumber: String
+  effectiveAfter: Date
+  effectiveBefore: Date
+  state: String
+}
+
+# ---------------------------------------------------------------------------
+# Lender / Mortgagee
+# ---------------------------------------------------------------------------
+
+type Lender {
+  id: ID!
+  name: String!
+  loanNumber: String
+  address: Address!
+  escrowBilling: Boolean!
+}
+
+input LenderInput {
+  name: String!
+  loanNumber: String
+  address: AddressInput!
+  escrowBilling: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Payment
+# ---------------------------------------------------------------------------
+
+type Payment {
+  id: ID!
+  policyId: ID!
+  amount: Decimal!
+  currency: String!
+  status: PaymentStatus!
+  method: PaymentMethod!
+  frequency: PaymentFrequency!
+  dueDate: Date!
+  paidDate: DateTime
+  transactionId: String
+  failureReason: String
+  createdAt: DateTime!
+}
+
+type PaymentMethodRecord {
+  id: ID!
+  type: PaymentMethod!
+  last4: String
+  brand: String
+  bankName: String
+  isDefault: Boolean!
+  expiresAt: Date
+}
+
+input PaymentMethodInput {
+  type: PaymentMethod!
+  token: String!
+  isDefault: Boolean
+}
+
+input PaymentInput {
+  policyId: ID!
+  amount: Decimal!
+  paymentMethodId: ID!
+}
+
+input BillingScheduleInput {
+  policyId: ID!
+  frequency: PaymentFrequency!
+  paymentMethodId: ID!
+  startDate: Date
+}
+
+# ---------------------------------------------------------------------------
+# Endorsement
+# ---------------------------------------------------------------------------
+
+type Endorsement {
+  id: ID!
+  policyId: ID!
+  status: EndorsementStatus!
+  description: String!
+  effectiveDate: Date!
+  premiumChange: Decimal
+  coverageChanges: [Coverage!]!
+  requestedAt: DateTime!
+  processedAt: DateTime
+}
+
+input EndorsementInput {
+  description: String!
+  effectiveDate: Date!
+  coverageChanges: [CoverageInput!]
+  propertyChanges: PropertyInput
+  vehicleChanges: [VehicleInput!]
+  driverChanges: [DriverInput!]
+}
+
+# ---------------------------------------------------------------------------
+# Document
+# ---------------------------------------------------------------------------
+
+type Document {
+  id: ID!
+  policyId: ID!
+  type: DocumentType!
+  title: String!
+  url: String!
+  expiresAt: DateTime
+  generatedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Bind Request
+# ---------------------------------------------------------------------------
+
+input BindRequest {
+  paymentMethod: PaymentMethodInput!
+  paymentFrequency: PaymentFrequency!
+  lender: LenderInput
+  effectiveDate: Date
+  agreeToTerms: Boolean!
+}
+
+# ---------------------------------------------------------------------------
+# Cancellation
+# ---------------------------------------------------------------------------
+
+input CancellationInput {
+  reason: CancellationReason!
+  effectiveDate: Date!
+  notes: String
+}
+
+type CancellationResult {
+  policyId: ID!
+  status: PolicyStatus!
+  cancellationDate: Date!
+  refundAmount: Decimal
+  confirmationNumber: String!
+}
+
+# ---------------------------------------------------------------------------
+# Connection / Pagination Types
+# ---------------------------------------------------------------------------
+
+type QuoteConnection {
+  edges: [QuoteEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type QuoteEdge {
+  cursor: String!
+  node: HomeQuote
+}
+
+type PolicyConnection {
+  edges: [PolicyEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PolicyEdge {
+  cursor: String!
+  node: HomePolicy
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ---------------------------------------------------------------------------
+# Rate / Underwriting Result
+# ---------------------------------------------------------------------------
+
+type UnderwritingResult {
+  approved: Boolean!
+  declineReasons: [String!]
+  referralReasons: [String!]
+  notes: String
+}
+
+# ---------------------------------------------------------------------------
+# State Availability
+# ---------------------------------------------------------------------------
+
+type StateAvailability {
+  state: String!
+  stateCode: String!
+  availableProducts: [ProductLine!]!
+  isAvailable: Boolean!
+}
+
+# ---------------------------------------------------------------------------
+# Root Query
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Partner
+  getPartner(id: ID!): Partner
+  me: Partner
+
+  # Quotes
+  getHomeQuote(id: ID!): HomeQuote
+  getAutoQuote(id: ID!): AutoQuote
+  getRentersQuote(id: ID!): RentersQuote
+  getUmbrellaQuote(id: ID!): UmbrellaQuote
+  getBundleQuote(id: ID!): BundleQuote
+  listQuotes(filter: QuoteFilter, limit: Int, offset: Int): QuoteConnection!
+
+  # Policies
+  getHomePolicy(id: ID!): HomePolicy
+  getAutoPolicy(id: ID!): AutoPolicy
+  getRentersPolicy(id: ID!): RentersPolicy
+  getUmbrellaPolicy(id: ID!): UmbrellaPolicy
+  getPolicyByNumber(policyNumber: String!): HomePolicy
+  listPolicies(filter: PolicyFilter, limit: Int, offset: Int): PolicyConnection!
+
+  # Applicant
+  getApplicant(id: ID!): Applicant
+  findApplicant(email: String!): Applicant
+
+  # Document
+  getDocument(id: ID!): Document
+  listDocuments(policyId: ID!): [Document!]!
+
+  # Payment
+  getPayment(id: ID!): Payment
+  listPayments(policyId: ID!): [Payment!]!
+  listPaymentMethods: [PaymentMethodRecord!]!
+
+  # Endorsement
+  getEndorsement(id: ID!): Endorsement
+  listEndorsements(policyId: ID!): [Endorsement!]!
+
+  # Availability
+  checkStateAvailability(state: String!): StateAvailability!
+  listAvailableStates: [StateAvailability!]!
+
+  # Rating factors / lookup
+  lookupVehicle(vin: String!): Vehicle
+  estimateDwellingValue(property: PropertyInput!): Decimal
+}
+
+# ---------------------------------------------------------------------------
+# Root Mutation
+# ---------------------------------------------------------------------------
+
+type Mutation {
+  # Quoting
+  createHomeQuote(input: HomeQuoteRequest!): HomeQuote!
+  createAutoQuote(input: AutoQuoteRequest!): AutoQuote!
+  createRentersQuote(input: RentersQuoteRequest!): RentersQuote!
+  createUmbrellaQuote(input: UmbrellaQuoteRequest!): UmbrellaQuote!
+  createBundleQuote(input: BundleQuoteRequest!): BundleQuote!
+  updateQuote(id: ID!, input: QuoteUpdateInput!): HomeQuote!
+  refreshQuote(id: ID!): HomeQuote!
+
+  # Binding
+  bindHomeQuote(id: ID!, input: BindRequest!): HomePolicy!
+  bindAutoQuote(id: ID!, input: BindRequest!): AutoPolicy!
+  bindRentersQuote(id: ID!, input: BindRequest!): RentersPolicy!
+  bindUmbrellaQuote(id: ID!, input: BindRequest!): UmbrellaPolicy!
+  bindBundleQuote(id: ID!, input: BindRequest!): [HomePolicy!]!
+
+  # Payment
+  addPaymentMethod(input: PaymentMethodInput!): PaymentMethodRecord!
+  removePaymentMethod(id: ID!): Boolean!
+  processPayment(input: PaymentInput!): Payment!
+  updateBillingSchedule(input: BillingScheduleInput!): Policy!
+
+  # Policy management
+  requestEndorsement(policyId: ID!, input: EndorsementInput!): Endorsement!
+  cancelPolicy(policyId: ID!, input: CancellationInput!): CancellationResult!
+
+  # Documents
+  retrieveDocument(policyId: ID!, type: DocumentType!): Document!
+
+  # Partner / admin
+  updatePartnerWebhook(url: String!): Partner!
+}
+
+# ---------------------------------------------------------------------------
+# Subscriptions
+# ---------------------------------------------------------------------------
+
+type Subscription {
+  quoteStatusChanged(quoteId: ID!): HomeQuote!
+  policyStatusChanged(policyId: ID!): HomePolicy!
+  paymentProcessed(policyId: ID!): Payment!
+  endorsementStatusChanged(endorsementId: ID!): Endorsement!
+}

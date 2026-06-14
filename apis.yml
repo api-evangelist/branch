@@ -1,6 +1,10 @@
 aid: branch
 name: Branch Insurance
-description: Branch is a home and auto insurance platform that offers bundled policy quoting, binding, payment processing, and policy management through a GraphQL API. Partners can embed Branch's insurance products directly into their own workflows using the Quote to Bind API, enabling customers to get quotes and purchase home, auto, renters, and umbrella insurance in seconds.
+description: Branch is a home and auto insurance platform that offers bundled policy
+  quoting, binding, payment processing, and policy management through a GraphQL API.
+  Partners can embed Branch's insurance products directly into their own workflows
+  using the Quote to Bind API, enabling customers to get quotes and purchase home,
+  auto, renters, and umbrella insurance in seconds.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/branch/refs/heads/main/apis.yml
@@ -8,51 +12,56 @@ created: '2026-06-13'
 modified: '2026-06-13'
 specificationVersion: '0.19'
 tags:
-  - Insurance
+- Insurance
+- Home Insurance
+- Auto Insurance
+- Renters Insurance
+- Umbrella Insurance
+- Quote to Bind
+- GraphQL
+- InsurTech
+apis:
+- aid: branch:quote-to-bind-api
+  name: Branch Quote to Bind API
+  description: A GraphQL API that enables partner platforms to embed Branch home and
+    auto insurance quoting, binding, and policy management into their own workflows.
+    The API covers the full insurance lifecycle from initial quote generation through
+    policy purchase and document retrieval.
+  humanURL: https://docs.v2.api.ourbranch.com/
+  baseURL: https://ourbranch.com/
+  tags:
+  - Insurance Quoting
+  - Policy Binding
   - Home Insurance
   - Auto Insurance
-  - Renters Insurance
-  - Umbrella Insurance
-  - Quote to Bind
   - GraphQL
-  - InsurTech
-apis:
-  - aid: branch:quote-to-bind-api
-    name: Branch Quote to Bind API
-    description: A GraphQL API that enables partner platforms to embed Branch home and auto insurance quoting, binding, and policy management into their own workflows. The API covers the full insurance lifecycle from initial quote generation through policy purchase and document retrieval.
-    humanURL: https://docs.v2.api.ourbranch.com/
-    baseURL: https://ourbranch.com/
-    tags:
-      - Insurance Quoting
-      - Policy Binding
-      - Home Insurance
-      - Auto Insurance
-      - GraphQL
-    properties:
-      - type: Documentation
-        url: https://docs.v2.api.ourbranch.com/
-      - type: GraphQLPlayground
-        url: https://staging.v2.api.ourbranch.com/
-    contact:
-      - FN: Branch API Support
-        email: api@ourbranch.com
-common:
-  - type: Website
-    url: https://www.ourbranch.com/
+  properties:
   - type: Documentation
     url: https://docs.v2.api.ourbranch.com/
-  - type: Blog
-    url: https://www.ourbranch.com/s/blog
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/branch-insurance
-  - type: X
-    url: https://twitter.com/branchinsurance
-  - type: Plans
-    url: plans/branch-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/branch-rate-limits.yml
-  - type: FinOps
-    url: finops/branch-finops.yml
+  - type: GraphQLPlayground
+    url: https://staging.v2.api.ourbranch.com/
+  - url: graphql/branch-graphql.md
+    type: GraphQL
+  contact:
+  - FN: Branch API Support
+    email: api@ourbranch.com
+common:
+- type: Website
+  url: https://www.ourbranch.com/
+- type: Documentation
+  url: https://docs.v2.api.ourbranch.com/
+- type: Blog
+  url: https://www.ourbranch.com/s/blog
+- type: LinkedIn
+  url: https://www.linkedin.com/company/branch-insurance
+- type: X
+  url: https://twitter.com/branchinsurance
+- type: Plans
+  url: plans/branch-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/branch-rate-limits.yml
+- type: FinOps
+  url: finops/branch-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
