@@ -7,31 +7,69 @@
       "title": "Meet Branch's AI claims agent: cAItlin",
       "url": "https://www.ourbranch.com/s/blog/ai-claims-agent-caitlin",
       "summary": "Branch Insurance has launched cAItlin, an AI agent designed to revolutionize the claims filing process. Available 24/7 with zero hold times and an average call time under four minutes, approximately 85% of initial claims calls now route through cAItlin. The system handles about 56% of member support calls and can automatically dispatch water mitigation services for eligible homeowners' claims.",
-      "tags": ["AI", "Claims", "InsurTech", "Customer Service"]
+      "tags": [
+        "AI",
+        "Claims",
+        "InsurTech",
+        "Customer Service"
+      ]
     },
     {
       "title": "Protecting your home and car during a hurricane",
       "url": "https://www.ourbranch.com/s/blog/hurricane-blog-post",
       "summary": "Branch Insurance provides comprehensive guidance on hurricane preparedness and recovery, covering emergency supply stocking, securing valuables, storm shutters, roof clips, and evacuation planning. The post highlights that standard home insurance may cover wind and rain damage but flood damage typically requires separate flood insurance.",
-      "tags": ["Hurricane", "Home Insurance", "Auto Insurance", "Weather Preparedness"]
+      "tags": [
+        "Hurricane",
+        "Home Insurance",
+        "Auto Insurance",
+        "Weather Preparedness"
+      ]
     },
     {
       "title": "How Black history shaped insurance history",
       "url": "https://www.ourbranch.com/s/blog/how-black-history-shaped-insurance-history",
       "summary": "A Black History Month reflection on how Black history and insurance industry pioneers shaped the modern insurance landscape, highlighting contributions and challenges faced by Black communities in the insurance sector.",
-      "tags": ["History", "Insurance", "Diversity", "Black History Month"]
+      "tags": [
+        "History",
+        "Insurance",
+        "Diversity",
+        "Black History Month"
+      ]
     },
     {
       "title": "Spring is here. Here's how you can prep your home and car for it.",
       "url": "https://www.ourbranch.com/s/blog/spring-is-here",
       "summary": "Seasonal preparation advice for vehicles and homes as spring arrives. Covers checking batteries, refilling fluids, inspecting brakes, clearing gutters, inspecting roofs for winter damage, trimming tree branches, and testing smoke detectors. Emphasizes preventive maintenance to avoid bigger expenses down the road.",
-      "tags": ["Home Maintenance", "Auto Maintenance", "Seasonal Tips", "Prevention"]
+      "tags": [
+        "Home Maintenance",
+        "Auto Maintenance",
+        "Seasonal Tips",
+        "Prevention"
+      ]
     },
     {
       "title": "What's a B Corp?",
       "url": "https://www.ourbranch.com/s/blog/whats-a-b-corp",
       "summary": "Branch Insurance explains their B Corp Certification and commitment to communal good. The post describes insurance as fundamentally rooted in neighbors pooling money to protect each other, and details B Corp's seven impact topics: purpose and stakeholder governance, climate action, justice/equity/diversity/inclusion, government affairs, fair work, human rights, and environmental stewardship.",
-      "tags": ["B Corp", "Corporate Responsibility", "Insurance", "Ethics", "Sustainability"]
+      "tags": [
+        "B Corp",
+        "Corporate Responsibility",
+        "Insurance",
+        "Ethics",
+        "Sustainability"
+      ]
     }
-  ]
+  ],
+  "repo": "branch",
+  "feeds": [
+    {
+      "source": "https://docs.v2.api.ourbranch.com/",
+      "feed_url": "https://docs.v2.api.ourbranch.com/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-14T20:42:17Z"
 }
