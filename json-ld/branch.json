@@ -5,7 +5,7 @@
   "name": "Branch Insurance",
   "description": "Branch is a home and auto insurance platform that offers bundled policy quoting, binding, payment processing, and policy management through a GraphQL API. Partners can embed Branch's insurance products directly into their own workflows using the Quote to Bind API, enabling customers to get quotes and purchase home, auto, renters, and umbrella insurance in seconds.",
   "url": "https://www.ourbranch.com/",
-  "logo": "https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg",
+  "logo": "https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg",
   "sameAs": [
     "https://www.linkedin.com/company/branch-insurance",
     "https://twitter.com/branchinsurance"

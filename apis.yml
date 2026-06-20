@@ -6,7 +6,7 @@ description: Branch is a home and auto insurance platform that offers bundled po
   using the Quote to Bind API, enabling customers to get quotes and purchase home,
   auto, renters, and umbrella insurance in seconds.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/branch/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
