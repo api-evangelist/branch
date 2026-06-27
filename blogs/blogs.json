@@ -63,13 +63,13 @@
   "repo": "branch",
   "feeds": [
     {
-      "source": "https://docs.v2.api.ourbranch.com/",
-      "feed_url": "https://docs.v2.api.ourbranch.com/",
-      "title": "",
+      "source": "https://www.ourbranch.com/s/blog",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:28:36Z",
+  "agent_pulled": "2026-06-27"
 }
