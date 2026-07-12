@@ -46,6 +46,8 @@ apis:
   - FN: Branch API Support
     email: api@ourbranch.com
 common:
+- type: DomainSecurity
+  url: security/branch-domain-security.yml
 - type: Website
   url: https://www.ourbranch.com/
 - type: Documentation
