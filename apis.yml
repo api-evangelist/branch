@@ -31,6 +31,15 @@ tags:
 - Umbrella Insurance
 - Quote to Bind
 - GraphQL
+- Insurtech
+tags_raw:
+- Insurance
+- Home Insurance
+- Auto Insurance
+- Renters Insurance
+- Umbrella Insurance
+- Quote to Bind
+- GraphQL
 - InsurTech
 apis:
 - aid: branch:quote-to-bind-api
