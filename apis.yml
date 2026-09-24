@@ -75,8 +75,6 @@ apis:
     url: https://docs.v2.api.ourbranch.com/
   - type: GraphQLPlayground
     url: https://staging.v2.api.ourbranch.com/
-  - url: graphql/branch-graphql.md
-    type: GraphQL
   contact:
   - FN: Branch API Support
     email: api@ourbranch.com
