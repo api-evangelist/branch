@@ -63,7 +63,6 @@ apis:
     The API covers the full insurance lifecycle from initial quote generation through
     policy purchase and document retrieval.
   humanURL: https://docs.v2.api.ourbranch.com/
-  baseURL: https://ourbranch.com/
   tags:
   - Insurance Quoting
   - Policy Binding
