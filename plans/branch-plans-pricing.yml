@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Branch Insurance API Plans & Pricing
 description: Branch Insurance API access is partner-based and requires direct engagement with the Branch team. There are no publicly listed self-serve pricing tiers. Partners integrate the Quote to Bind GraphQL API to embed home and auto insurance quoting and binding into their own workflows.
 url: https://docs.v2.api.ourbranch.com/
